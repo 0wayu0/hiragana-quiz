@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ja">
+<หัว>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ใ ฒใ'‰ใ Œใ ช ใ'ฏใ'คใ'บ</title>
+<สไตล์>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --หมึก: #1a1a2e;
+    --กระดาษ: #f5f0e8;
+    --สีแดง: #c0392b;
+    --สีทอง: #d4a017;
+    --สีเขียว: #1a7a4a;
+    --สีน้ำเงิน: #2c5f8a;
+    --แสง: #ede8dc;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  ร่างกาย {
+    ตระกูลฟอนต์: 'Noto Sans JP', sans-serif;
+    พื้นหลัง: var(--กระดาษ);
+    สี: var(--ink);
+    ความสูงขั้นต่ำ: 100dvh;
+    แสดงผล: ยืดหยุ่น;
+    ทิศทางการดัดงอ: คอลัมน์;
+    จัดวางรายการให้อยู่ตรงกลาง;
+    overflow-x: ซ่อนไว้;
+  }
+
+  บอดี้::เบฟอร์ {
+    เนื้อหา: '';
+    ตำแหน่ง: คงที่; ระยะห่าง: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    เหตุการณ์ตัวชี้: ไม่มี;
+    ดัชนี z: 0;
+  }
+
+  .แอป {
+    ความกว้าง: 100%;
+    ความกว้างสูงสุด: 420 พิกเซล;
+    ความสูงขั้นต่ำ: 100dvh;
+    แสดงผล: ยืดหยุ่น;
+    ทิศทางการดัดงอ: คอลัมน์;
+    ระยะห่าง: 0 0 24px;
+    ตำแหน่ง: สัมพัทธ์;
+    ดัชนี z: 1;
+  }
+
+  .header {
+    ระยะห่างภายใน: 20px 24px 16px;
+    แสดงผล: ยืดหยุ่น;
+    จัดวางรายการให้อยู่ตรงกลาง;
+    justify-content: space-between;
+    ขอบล่าง: 2px ทึบ var(--ink);
+  }
+
+  .โลโก้ {
+    ขนาดตัวอักษร: 22 พิกเซล; น้ำหนักตัวอักษร: 900; ระยะห่างระหว่างตัวอักษร: -0.5 พิกเซล;
+    สี: var(--ink); การแสดงผล: flex; การจัดแนวรายการ: baseline; ช่องว่าง: 6px;
+  }
+  .โลโก้ span {
+    ขนาดตัวอักษร: 13 พิกเซล; น้ำหนักตัวอักษร: 400; ระยะห่างระหว่างตัวอักษร: 2 พิกเซล;
+    แปลงข้อความ: ตัวพิมพ์ใหญ่; ความทึบแสง: 0.5;
+  }
+
+  .stats-row { display: flex; gap: 16px; align-items: center; }
+  .stat { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .stat-val { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; line-height: 1; }
+  .stat-label { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.45; }
+  .stat.correct .stat-val { สี: var (--เขียว); }
+  .stat.wrong .stat-val { color: var(--red); }
+
+  พื้นที่แบบทดสอบ {
+    เฟล็กซ์: 1;
+    แสดงผล: ยืดหยุ่น;
+    ทิศทางการดัดงอ: คอลัมน์;
+    จัดวางรายการให้อยู่ตรงกลาง;
+    ระยะห่างภายใน: 28px 24px 12px;
+    ช่องว่าง: 18 พิกเซล;
+  }
+
+  .char-card {
+    ความกว้าง: 100%; อัตราส่วนภาพ: 1; ความกว้างสูงสุด: 250 พิกเซล;
+    พื้นหลัง: สีขาว; ขอบ: ทึบ 3 พิกเซล (--หมึก); ขอบโค้งมน: 4 พิกเซล;
+    การแสดงผล: flex; จัดตำแหน่งรายการ: ตรงกลาง; จัดตำแหน่งเนื้อหา: ตรงกลาง;
+    ตำแหน่ง: สัมพัทธ์; เงาของกล่อง: 6px 6px 0 var(--ink); การไหลเกิน: ซ่อน;
+  }
+
+  .char-card::before {
+    เนื้อหา: '';
+    ตำแหน่ง: สัมบูรณ์; ระยะห่าง: 0;
+    พื้นหลัง: การไล่ระดับสีเชิงเส้นซ้ำๆ (
+      0 องศา, โปร่งใส, โปร่งใส 39 พิกเซล,
+      rgba(26,26,46,0.06) 39px, rgba(26,26,46,0.06) 40px
+    );
+  }
+
+  .char-display {
+    ขนาดตัวอักษร: 115 พิกเซล; น้ำหนักตัวอักษร: 700; ความสูงของบรรทัด: 1;
+    สี: var(--ink); ตำแหน่ง: relative;
+    text-shadow: 3px 3px 0 rgba(26,26,46,0.08); user-select: none;
+  }
+
+  .char-card.flip-out .char-display { animation: flipOut 0.2s ease forwards; }
+  .char-card.flip-in .char-display { animation: flipIn 0.2s ease forwards; }
+
+  @keyframes flipOut { to { opacity:0; transform:scale(0.7) rotateY(90deg); } }
+  @keyframes flipIn {
+    จาก { opacity:0; transform:scale(0.7) rotateY(-90deg); }
+    เป็น { opacity:1; transform:scale(1) rotateY(0deg); }
+  }
+
+  .สตรีค {
+    ตำแหน่ง: สัมบูรณ์; ด้านบน: 10 พิกเซล; ด้านขวา: 10 พิกเซล;
+    พื้นหลัง: var(--สีทอง); สี: ขาว;
+    ขนาดตัวอักษร: 11 พิกเซล; น้ำหนักตัวอักษร: 700;
+    ระยะห่างภายใน: 3px 8px; ขอบโค้งมน: 99px;
+    ความทึบแสง: 0; การแปลง: สเกล(0.8);
+    การเปลี่ยนภาพ: ความทึบแสง 0.3 วินาที, การแปลง 0.3 วินาที;
+  }
+  .streak.show { opacity: 1; transform: scale(1); }
+
+  /* แถวตัวจับเวลา + ไมโครโฟน */
+  .controls-row {
+    แสดงผล: ยืดหยุ่น;
+    จัดวางรายการให้อยู่ตรงกลาง;
+    จัดวางเนื้อหาให้อยู่ตรงกลาง;
+    ช่องว่าง: 32 พิกเซล;
+    ความกว้าง: 100%;
+  }
+
+  .timer-wrap { ความกว้าง: 72px; ความสูง: 72px; ตำแหน่ง: สัมพันธ์; }
+  .timer-svg { ความกว้าง: 72px; ความสูง: 72px; การแปลง: หมุน(-90 องศา); }
+  .timer-bg { fill:none; stroke:var(--light); stroke-width:6; }
+  .timer-arc {
+    สี: ไม่มี; เส้นขอบ: var(--ink); ความกว้างของเส้นขอบ: 6;
+    ปลายเส้นขีด:กลม;
+    stroke-dasharray: 194.8;
+    ระยะห่างของเส้นประ: 0;
+    การเปลี่ยนภาพ: ระยะห่างระหว่างเส้นขีดและเส้นประ 0.1 วินาที แบบเส้นตรง, เส้นขีด 0.3 วินาที;
+  }
+  .timer-arc.urgent { จังหวะ: var (--red); }
+  .timer-num {
+    ตำแหน่ง: สัมบูรณ์; ระยะห่าง: 0;
+    การแสดงผล: flex; จัดตำแหน่งรายการ: ตรงกลาง; จัดตำแหน่งเนื้อหา: ตรงกลาง;
+    แบบอักษร: 'DM Mono', แบบตัวอักษรคงที่; ขนาดตัวอักษร: 20 พิกเซล; น้ำหนักตัวอักษร: 500;
+    สี: var(--ink); การเปลี่ยนภาพ: สี 0.3 วินาที;
+  }
+  .timer-num.urgent { สี: var (--สีแดง); }
+
+  /* ไมโครโฟน */
+  .mic-section {
+    แสดงผล: flex; ทิศทาง flex: column; จัดตำแหน่งรายการ: center; ช่องว่าง: 8px;
+  }
+
+  .mic-btn {
+    ความกว้าง: 88 พิกเซล; ความสูง: 88 พิกเซล; ขอบโค้งมน: 50%;
+    ขอบ: ทึบ 3 พิกเซล (--หมึก); พื้นหลัง: สีขาว;
+    การแสดงผล: flex; จัดตำแหน่งรายการ: ตรงกลาง; จัดตำแหน่งเนื้อหา: ตรงกลาง;
+    เคอร์เซอร์: ตัวชี้; ตำแหน่ง: สัมพัทธ์;
+    เงาของกล่อง: 4px 4px 0 var(--ink);
+    การเปลี่ยนภาพ: แปลง 0.1 วินาที, เงาของกล่อง 0.1 วินาที, สีขอบ 0.2 วินาที;
+    โครงร่าง: ไม่มี; -ลักษณะที่ปรากฏของเว็บคิท: ไม่มี;
+  }
+  .mic-btn:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--ink); }
+  .mic-btn svg { width: 34px; height: 34px; fill: var(--ink); transition: fill 0.2s; }
+
+  .mic-btn.listening {
+    สีขอบ: var(--red);
+    เงาของกล่อง: 4px 4px 0 var(--red);
+    แอนิเมชัน: พัลส์ริง 1 วินาที อะซีค อินฟินิตี้;
+  }
+  .mic-btn.listening svg { fill: var(--red); }
+
+  @keyframes pulse-ring {
+    0%,100% { แปลง: ปรับขนาด(1); }
+    50% { transform: scale(1.06); }
+  }
+
+  .wave-bars {
+    การแสดงผล: flex; ช่องว่าง: 3px; จัดตำแหน่งรายการ: ตรงกลาง; ความสูง: 22px;
+    ความทึบแสง: 0; การเปลี่ยนภาพ: ความทึบแสง 0.2 วินาที;
+  }
+  .wave-bars.active { opacity: 1; }
+
+  .wave-bar {
+    ความกว้าง: 4 พิกเซล; พื้นหลัง: สีแดง (--red); ขอบโค้งมน: 99 พิกเซล;
+    แอนิเมชัน: wavebar 0.75s ease infinite;
+  }
+  .wave-bar:nth-child(1) { animation-delay:0s; height:7px; }
+  .wave-bar:nth-child(2) { animation-delay:0.15s; height:15px; }
+  .wave-bar:nth-child(3) { animation-delay:0.05s; height:20px; }
+  .wave-bar:nth-child(4) { animation-delay:0.2s; height:13px; }
+  .wave-bar:nth-child(5) { animation-delay:0.1s; height:7px; }
+
+  @keyframes wavebar {
+    0%,100% { transform: scaleY(0.4); opacity:0.5; }
+    50% { transform: scaleY(1); opacity:1; }
+  }
+
+  .mic-label {
+    ขนาดตัวอักษร: 11 พิกเซล; ระยะห่างระหว่างตัวอักษร: 1.5 พิกเซล;
+    แปลงข้อความ: ตัวพิมพ์ใหญ่; ความทึบแสง: 0.45; น้ำหนักตัวอักษร: 500;
+    การเปลี่ยนภาพ: ความโปร่งใส 0.2 วินาที, สี 0.2 วินาที;
+  }
+  .mic-label.active { opacity:1; color:var(--red); font-weight:700; }
+
+  /* ได้ยิน */
+  .heard-text {
+    แบบอักษร: 'DM Mono', แบบตัวอักษรคงที่;
+    ขนาดตัวอักษร: 20 พิกเซล; น้ำหนักตัวอักษร: 500;
+    ระยะห่างระหว่างตัวอักษร: 3 พิกเซล; สี: var(--ink);
+    ความสูงขั้นต่ำ: 26 พิกเซล; จัดแนวข้อความ: ตรงกลาง;
+    ความทึบแสง: 0.4; การเปลี่ยนภาพ: ความทึบแสง 0.2 วินาที;
+  }
+  .heard-text.filled { opacity: 1; }
+
+  /* ข้อเสนอแนะ */
+  .ข้อเสนอแนะ {
+    ความกว้าง: 100%; ระยะห่างภายใน: 11px 16px; ขอบโค้งมน: 4px;
+    ขนาดตัวอักษร: 14 พิกเซล; น้ำหนักตัวอักษร: 700; จัดแนวข้อความ: กึ่งกลาง;
+    ระยะห่างระหว่างตัวอักษร: 0.5 พิกเซล; ความสูงขั้นต่ำ: 42 พิกเซล;
+    การแสดงผล: flex; จัดตำแหน่งรายการ: ตรงกลาง; จัดตำแหน่งเนื้อหา: ตรงกลาง;
+    ขอบ: ทึบโปร่งใส 2 พิกเซล; การเปลี่ยนภาพ: ทั้งหมด 0.2 วินาที;
+  }
+  .feedback.correct { background:rgba(26,122,74,0.1); color:var(--green); border-color:var(--green); }
+  .feedback.wrong { background:rgba(192,57,43,0.08); color:var(--red); border-color:var(--red); }
+  .feedback.timeout { background:rgba(212,160,23,0.1); color:var(--gold); border-color:var(--gold); }
+  .feedback.hint { background:rgba(44,95,138,0.07); color:var(--blue); border-color:var(--blue); }
+  .feedback.empty { background:transparent; border-color:transparent; }
+
+  .hint-row { display:flex; gap:10px; width:100%; }
+  .hint-btn {
+    flex:1; padding:10px; background:transparent;
+    ขอบ: 1.5 พิกเซล แบบทึบ rgba(26,26,46,0.25); ขอบโค้งมน: 4 พิกเซล;
+    ขนาดตัวอักษร: 12 พิกเซล; น้ำหนักตัวอักษร: 500; ระยะห่างระหว่างตัวอักษร: 1 พิกเซล;
+    text-transform:uppercase; color:rgba(26,26,46,0.5); cursor:pointer;
+    การเปลี่ยนผ่าน:ทั้งหมด 0.15 วินาที;
+  }
+  .hint-btn:hover, .hint-btn:active { border-color:var(--ink); color:var(--ink); background:var(--light); }
+
+  .progress-wrap { width:100%; padding:0 24px; }
+  .progress-label {
+    ขนาดตัวอักษร: 10 พิกเซล; ระยะห่างระหว่างตัวอักษร: 2 พิกเซล; แปลงข้อความ: ตัวพิมพ์ใหญ่;
+    ความทึบแสง: 0.4; ระยะขอบด้านล่าง: 6 พิกเซล; การแสดงผล: ยืดหยุ่น; จัดวางเนื้อหาให้พอดีด้วยช่องว่าง;
+  }
+  .แถบความคืบหน้า {
+    ความกว้าง: 100%; ความสูง: 6 พิกเซล; พื้นหลัง: var(--light);
+    border-radius:99px; overflow:hidden; border:1px solid rgba(26,26,46,0.1);
+  }
+  .progress-fill { height:100%; background:var(--ink); border-radius:99px; transition:width 0.5s ease; }
+
+  .legend-toggle {
+    margin:0 24px; padding:12px 16px; background:white;
+    ขอบ: 2px ทึบ var(--ink); ขอบโค้งมน: 4px;
+    ขนาดตัวอักษร: 12 พิกเซล; น้ำหนักตัวอักษร: 700; ระยะห่างระหว่างตัวอักษร: 1 พิกเซล; แปลงข้อความ: ตัวพิมพ์ใหญ่;
+    เคอร์เซอร์:ตัวชี้; การแสดงผล:แบบยืดหยุ่น; จัดตำแหน่งรายการ:ตรงกลาง; จัดตำแหน่งเนื้อหา:เว้นระยะห่างระหว่างกัน;
+    การเปลี่ยนภาพ: พื้นหลัง 0.15 วินาที;
+  }
+  .legend-toggle:hover { background: var(--light); }
+
+  .legend-grid {
+    margin:0 24px; display:none;
+    grid-template-columns:repeat(5,1fr); gap:1px;
+    พื้นหลัง: var(--ink); ขอบ: 2px solid var(--ink);
+    ขอบโค้งมน: 4 พิกเซล; ซ่อนส่วนเกิน;
+  }
+  .legend-grid.open { display:grid; }
+  .legend-cell {
+    พื้นหลัง:สีขาว; ระยะห่างภายใน:8px 4px;
+    display:flex; flex-direction:column; align-items:center; gap:2px;
+  }
+  .legend-cell .hira { font-size:18px; line-height:1; }
+  .legend-cell .roma { font-family:'DM Mono',monospace; font-size:9px; opacity:0.55; letter-spacing:0.5px; }
+  .weight-bar { width:100%; height:3px; background:var(--light); position:relative; }
+  .weight-fill { position:absolute; left:0;top:0;bottom:0; background:var(--red); transition:width 0.4s ease; border-radius:0 2px 2px 0; }
+
+  .result-flash {
+    ตำแหน่ง:คงที่; ระยะห่างจากศูนย์กลาง:0; การแสดงผล:ยืดหยุ่น; จัดตำแหน่งรายการ:ตรงกลาง; จัดตำแหน่งเนื้อหา:ตรงกลาง;
+    ขนาดตัวอักษร: 80 พิกเซล; เหตุการณ์ตัวชี้: ไม่มี; ดัชนี z: 100; ความทึบแสง: 0;
+  }
+  .result-flash.show-correct { animation:flashGood 0.5s ease forwards; }
+  .result-flash.show-wrong { animation:flashBad 0.5s ease forwards; }
+  @keyframes flashGood { 0%{opacity:0;transform:scale(0.5)} 40%{opacity:1;transform:scale(1.2)} 100%{opacity:0;transform:scale(1.5)} }
+  @keyframes flashBad { 0%{opacity:0;transform:scale(0.5)} 40%{opacity:1;transform:scale(1.2)} 100%{opacity:0;transform:scale(1.5)} }
+
+  .ไม่รองรับ {
+    แสดงผล:ไม่มี; ระยะขอบ:8px 24px 0; ระยะห่างภายใน:10px 14px;
+    พื้นหลัง: rgba(212,160,23,0.12); ขอบ: 1.5px solid var(--gold);
+    ขอบโค้งมน: 4 พิกเซล; ขนาดตัวอักษร: 12 พิกเซล; สี: #8a6200; จัดแนวข้อความ: ตรงกลาง; ความสูงของบรรทัด: 1.5;
+  }
+
+  @media (ความสูงสูงสุด: 700 พิกเซล) {
+    .char-card { max-width:190px; }
+    .char-display { font-size:90px; }
+    .quiz-area { padding:14px 24px 8px; gap:12px; }
+    .mic-btn { width:76px; height:76px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <div class="logo">ใ ฒ<span>เสียง</span></div>
+    <div class="stats-row">
+      <div class="stat correct">
+        <div class="stat-val" id="stat-correct">0</div>
+        <div class="stat-label"> เกาหลี </div>
+      </div>
+      <div class="stat wrong">
+        <div class="stat-val" id="stat-wrong">0</div>
+        <div class="stat-label"> เดียเดีย”</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-support" id="no-support">
+    โš ๏ธเน€เธเน€เธเน€เธะเธียนเธ่เน€เธ€เธเน€เธเนเธ‰เน “ลิกเนˆซเลนเธ่เธซเธียเธ่เธฒเธนเธขเธ<br>
+    เธชเธ่“ เธฒเนเฒ่าสเน‰ Chrome เธซเธียน Edge เธ™ Android / Desktop
+  </div>
+
+  <div class="quiz-area">
+
+    <!-- อักขระ -->
+    <div class="char-card" id="char-card">
+      <div class="char-display" id="char-display">� ‚</div>
+      <div class="streak" id="streak-badge">๑Ÿ”ฅ 3</div>
+    </div>
+
+    <!-- ตัวจับเวลา + ไมโครโฟน -->
+    <div class="controls-row">
+      <div class="timer-wrap">
+        <svg class="timer-svg" viewBox="0 0 72 72">
+          <circle class="timer-bg" cx="36" cy="36" r="31"/>
+          <circle class="timer-arc" id="timer-arc" cx="36" cy="36" r="31"/>
+        </svg>
+        <div class="timer-num" id="timer-num">7</div>
+      </div>
+
+      <div class="mic-section">
+        <button class="mic-btn" id="mic-btn" aria-label=" ฿เธน” เธียร•เธีย">
+          <svg viewBox="0 0 24 24"><path d="M12 1a4 4 0 0 0-4 4v6a4 4 0 0 0 8 0V5a4 4 0 0 0-4-4zm-6 9a6 6 0 1 0 12 0h-2a4 4 0 0 1-8 0H6zm5 7.93V21H9v2h6v-2h-2v-3.07A7.001 7.001 0 0 0 19 10h-2a5 5 0 1 1-10 0H5a7.001 7.001 0 0 0 6 6.93z"/></svg>
+        </button>
+        <div class="wave-bars" id="wave-bars">
+          <div class="wave-bar"></div><div class="wave-bar"></div>
+          <div class="wave-bar"></div><div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+        </div>
+        <div class="mic-label" id="mic-label"> เธียร์” เน ฅเน‰ันเอชอาร์”</div>
+      </div>
+    </div>
+
+    <!-- ได้ยินแล้ว -->
+    <div class="heard-text" id="heard-text">โฆ"</div>
+
+    <!-- ข้อเสนอแนะ -->
+    <div class="feedback empty" id="feedback"></div>
+
+    <!-- คำแนะนำ / ข้าม -->
+    <div class="hint-row">
+      <button class="hint-btn" id="hint-btn">๐Ÿ'ก ฮ” เธียเธนเซินเน‰</button>
+      <button class="hint-btn" id="skip-btn">โ ญ เธ‰ เธียก</button>
+    </div>
+
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span> เนียฒัน เน‰ัฒนเธซ™เน‰ฒ</span>
+      <span id="progress-text">0 / 46</span>
+    </div>
+    <div class="แถบแสดงความคืบหน้า">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div style="height:12px"></div>
+  <button class="legend-toggle" id="legend-toggle">
+    <span>๐Ÿ“‹ เธ•เธฒเธ่เธฑเธฑเธียเธ่เธฒเธ™</span>
+    <span id="legend-arrow">โ–ผ</span>
+  </button>
+  <div class="legend-grid" id="legend-grid"></div>
+
+</div>
+
+<div class="result-flash" id="result-flash"></div>
+
+<script>
+// โ”€o”€ ข้อมูล โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€ โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+ฮิรากานะคงที่ = [
+  {h:'ใ ‚',r:'a'},{h:'ใ „',r:'i'},{h:'ใ †',r:'u'},{h:'ใ ˆ',r:'e'},{h:'ใ Š',r:'o'},
+  {h:'ใ ‹',r:'ka'},{h:'ใ ',r:'ki'},{h:'ใ ',r:'ku'},{h:'ใ '',r:'ke'},{h:'ใ “',r:'ko'},
+  {h:'ใ •',r:'sa'},{h:'ใ —',r:'shi'},{h:'ใ ™',r:'su'},{h:'ใ ›',r:'se'},{h:'ใ ',r:'so'},
+  {h:'ใ Ÿ',r:'ta'},{h:'ใก',r:'chi'},{h:'ใค',r:'tsu'},{h:'ใ ฆ',r:'te'},{h:'ใ จ',r:'to'},
+  {h:'ใ ช',r:'na'},{h:'ใ ซ',r:'ni'},{h:'ใ ฌ',r:'nu'},{h:'ใ ญ',r:'ne'},{h:'ใ ฎ',r:'no'},
+  {h:'ใ ฏ',r:'ha'},{h:'ใ ฒ',r:'hi'},{h:'ใ ต',r:'fu'},{h:'ใ ธ',r:'he'},{h:'ใ ป',r:'ho'},
+  {h:'ใพ',r:'ma'},{h:'ใ ฟ',r:'mi'},{h:'ใ‚€',r:'mu'},{h:'ใ' ',r:'me'},{h:'ใ'‚,r:'mo'},
+  {h:'ใ‚„,r:'ya'},{h:'ใ‚†',r:'yu'},{h:'ใ‚ˆ',r:'yo'},
+  {h:'ใ‚‰',r:'ra'},{h:'ใ‚Š',r:'ri'},{h:'ใ‚‹',r:'ru'},{h:'ใ‚Œ',r:'re'},{h:'ใ‚ ',r:'ro'},
+  {h:'ใ' ',r:'wa'},{h:'ใ''',r:'wo'},{h:'ใ'“',r:'n'}
+];
+
+// ตัวเลือกอื่นที่ยอมรับได้ (รูปแบบการจดจำเสียงพูด)
+const ACCEPTED = {
+  a: ['ah','a']
+  i: ['ee','i'],
+  u: ['oo','ooh','u']
+  e: ['eh','e'],
+  โอ: ['โอ','โอ']
+  ka: ['ka','kah']
+  ki: ['ki','kee','key'],
+  ku: ['ku','koo','coo'],
+  ke: ['ke','keh','kay'],
+  ko: ['ko','koh']
+  sa: ['sa','sah']
+  ชิ: ['shi', 'เธอ', 'si', 'shee'],
+  su: ['su','sue','soo'],
+  se: ['se','seh','say']
+  ดังนั้น: ['so','soh']
+  ta: ['ta','tah'],
+  ไค: ['ไค','ชี','ติ','tchi'],
+  สึ: ['tsu', 'su', 'tu', 'tsoo'],
+  te: ['te','teh','tay'],
+  ถึง: ['to','toh','toe']
+  na: ['na','nah'],
+  ni: ['ni','nee','knee'],
+  nu: ['nu','new','noo'],
+  ne: ['ne','neh','nay']
+  ไม่: ['ไม่','โนห์']
+  ฮา: ['ฮา','ฮา']
+  สวัสดี: ['hi','hee','he']
+  fu: ['fu','foo','hu','who']
+  เขา: ['he','heh','hey']
+  โฮ: ['โฮ','โฮ']
+  ma: ['ma','mah'],
+  mi: ['mi','mee','me'],
+  มู: ['มู','มู']
+  ฉัน: ['ฉัน','เฉยๆ','อาจจะ']
+  mo: ['mo','moh']
+  ya: ['ya','yah'],
+  ยู: ['ยู','ยู','คุณ'],
+  โย่: ['โย่','โย่']
+  รา: ['รา','ราห์']
+  ri: ['ri','ree'],
+  ru: ['ru','roo'],
+  re: ['re','reh','ray']
+  ro: ['ro','roh','row']
+  วา: ['วา','วา'],
+  wo: ['wo','o','oh'],
+  n: ['n','en','nn']
+};
+
+// โ”€o”€ รัฐ โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€โ ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+const weights = {};
+HIRAGANA.forEach(c => weights[ch] = 5);
+let currentChar=null, clockInterval=null, timeLeft=7;
+let totalCorrect=0, totalWrong=0, streak=0, answered=false, mastered={};
+let isListening=false;
+const CIRC = 2*Math.PI*31; // 194.8
+
+// โ”€o”€ DOM โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€โ ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+const $ = id => document.getElementById(id);
+const charDisplay=$('char-display'), charCard=$('char-card'),
+      timerArc=$('timer-arc'), timerNum=$('timer-num'),
+      feedback=$('feedback'), statCorrect=$('stat-correct'),
+      statWrong=$('stat-wrong'), streakBadge=$('streak-badge'),
+      resultFlash=$('result-flash'), hintBtn=$('hint-btn'),
+      skipBtn=$('skip-btn'), progressFill=$('progress-fill'),
+      progressText=$('progress-text'), legendGrid=$('legend-grid'),
+      legendToggle=$('legend-toggle'), legendArrow=$('legend-arrow'),
+      micBtn=$('mic-btn'), micLabel=$('mic-label'),
+      waveBars=$('wave-bars'), heardText=$('heard-text'),
+      noSupport=$('no-support');
+
+// โ”€o”€ การรู้จำเสียง โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€ โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recog = null;
+
+ถ้า (!SR) {
+  noSupport.style.display = 'block';
+  micBtn.disabled = true;
+  micBtn.style.opacity = '0.35';
+  micBtn.style.cursor = 'not-allowed';
+} อื่น {
+  recog = new SR();
+  recog.lang = 'en-US';
+  recog.interimResults = true;
+  recog.maxAlternatives = 6;
+  การรับรู้แบบต่อเนื่อง = เท็จ;
+
+  รับรู้เมื่อเริ่มต้น = () => {
+    isListening = true;
+    micBtn.classList.add('listening');
+    waveBars.classList.add('active');
+    micLabel.textContent = ' เธฑเธฑเธฑเธโ€ฆ';
+    micLabel.classList.add('active');
+    HeardText.textContent = 'โ€ฆ';
+    heardText.classList.remove('filled');
+  };
+
+  การรับรู้ผลลัพธ์ = (e) => {
+    const last = e.results[e.results.length - 1];
+    // รวบรวมทางเลือกการถอดเสียงทั้งหมด
+    const candidates = [];
+    สำหรับ (let r = 0; r < e.results.length; r++)
+      สำหรับ (let a = 0; a < e.results[r].length; a++)
+        candidates.push(e.results[r][a].transcript.trim().toLowerCase());
+
+    // แสดงข้อมูลชั่วคราวแบบเรียลไทม์
+    ถ้า (candidates[0]) {
+      heardText.textContent = candidates[0];
+      heardText.classList.add('filled');
+    }
+
+    ถ้า (สุดท้ายคือสุดท้าย) {
+      หยุดการฟัง();
+      resolveAnswer(candidates);
+    }
+  };
+
+  การรับรู้ข้อผิดพลาด = (e) => {
+    หยุดการฟัง();
+    if (e.error === 'no-speech') setFeedback('timeout','๐Ÿ”‡ เน “ไทยแลนด์ˆเน„เธ”เน‰เธขเธ™เน€ชเธ่เธขเธ‡ ฅฅเธลเธ่เธ่เธ่เธ่เนเธ่เธ‰เธ‡);
+    อื่น ๆ ถ้า (e.error === 'not-allowed') setFeedback('wrong','๐Ÿšsเธชเธชเธชเธฒเธ•เน“มากเน”เธลเธชเธชเธ™');
+    else setFeedback('timeout','โส ๏ธเน€เธีย” เธียเธ‰เธียเธียร์” ชัฟเฒ่า”');
+  };
+
+  recog.onend = () => หยุดฟัง();
+}
+
+ฟังก์ชัน startListening() {
+  หาก (ไม่ตอบรับหรือกำลังฟังอยู่) ให้หยุดการทำงาน
+  HeardText.textContent = 'โ€ฆ';
+  heardText.classList.remove('filled');
+  ลอง { recog.start(); } catch(e) {}
+}
+
+ฟังก์ชัน stopListening() {
+  isListening = false;
+  micBtn.classList.remove('listening');
+  waveBars.classList.remove('active');
+  micLabel.textContent = ' เธียร์” เน ฅเน‰หงษ์เอช”';
+  micLabel.classList.remove('active');
+  ลอง { recog.stop(); } catch(e) {}
+}
+
+micBtn.addEventListener('click', () => {
+  ถ้า (ตอบแล้ว) ให้ส่งคืน;
+  กำลังฟังอยู่หรือเปล่า? stopListening() : startListening();
+});
+
+// โ”€o”€ ความละเอียดของคำตอบ โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€โ ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+ฟังก์ชัน resolveAnswer(candidates) {
+  ถ้า (ตอบแล้ว) ให้ส่งคืน;
+  const correct = currentChar.r;
+  const accepted = ACCEPTED[correct] || [correct];
+
+  // ทดสอบโทเค็นผู้สมัครทุกตัวกับรายการที่ยอมรับแล้ว
+  สำหรับ (จำนวนผู้สมัครคงที่) {
+    const tok = raw.trim().toLowerCase().replace(/[^az']/g,'');
+    ถ้า (accepted.includes(tok)) {
+      คืนค่า finalise(true, raw);
+    }
+  }
+  // ไม่พบการจับคู่ — ให้ใช้ตัวเลือกแรกเป็น "สิ่งที่พวกเขาพูด"
+  finalise(false, candidates[0] || '?');
+}
+
+ฟังก์ชัน finalise(isCorrect, heardRaw) {
+  ถ้า (ตอบแล้ว) ให้ส่งคืน;
+  clearInterval(clockInterval);
+  ตอบแล้ว = จริง;
+
+  ถ้า (heardRaw) {
+    HeardText.textContent = HearRaw;
+    heardText.classList.add('filled');
+  }
+
+  const correct = currentChar.r;
+
+  ถ้า (ถูกต้อง) {
+    weights[currentChar.h] = Math.max(1, weights[currentChar.h] - 1);
+    ถ้า (weights[currentChar.h] === 1) mastered[currentChar.h] = true;
+    totalCorrect++; streak++;
+    statCorrect.textContent = totalCorrect;
+    setFeedback('correct', `oOE“ เธ–เธ‰เฉลิม‡๏ผโ€” ${correct.toUpperCase()}`);
+    แสดงแฟลช('โœ“', true);
+  } อื่น {
+    weights[currentChar.h] = Math.min(10, weights[currentChar.h] + 2);
+    mastered[currentChar.h] = false;
+    จำนวนข้อผิดพลาดทั้งหมดเพิ่มขึ้น; สตรีค = 0;
+    statWrong.textContent = รวมผิด;
+    setFeedback('wrong', `•oOE— เฟียร์”๏ผะเฒ่าเธ•เธียรเธ่เธ่ "${correct.toUpperCase()}"`);
+    แสดงแฟลช('โ—', false);
+  }
+
+  อัปเดตป้ายสตรีค();
+  ถ้า (classList ของ legendGrid มีคำว่า 'open' อยู่) ให้อัปเดตน้ำหนักของคำอธิบายภาพ (updateLegendWeights())
+  setTimeout(() => nextQuestion(), 1700);
+}
+
+// โ”€o”€ ตัวจับเวลา โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€โ ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+ฟังก์ชัน startTimer() {
+  clearInterval(clockInterval);
+  เวลาที่เหลือ = 7;
+  updateTimerUI();
+  clockInterval = setInterval(() => {
+    timeLeft = Math.max(0, timeLeft - 0.1);
+    updateTimerUI();
+    ถ้าเวลาที่เหลือ <= 0 ให้ล้างช่วงเวลาของนาฬิกาและเรียกใช้ฟังก์ชัน onTimeout()
+  }, 100);
+}
+
+ฟังก์ชัน updateTimerUI() {
+  const pct = timeLeft / 7;
+  timerArc.style.strokeDashoffset = CIRC * (1 - pct);
+  timerNum.textContent = Math.ceil (เวลาที่เหลือ);
+  const urg = timeLeft <= 3;
+  timerArc.classList.toggle('urgent', urg);
+  timerNum.classList.toggle('urgent', urg);
+}
+
+ฟังก์ชัน onTimeout() {
+  ถ้า (ตอบแล้ว) ให้ส่งคืน;
+  หยุดการฟัง();
+  ตอบแล้ว = จริง;
+  weights[currentChar.h] = Math.min(10, weights[currentChar.h] + 2);
+  mastered[currentChar.h] = false;
+  จำนวนข้อผิดพลาดทั้งหมดเพิ่มขึ้น; สตรีค = 0;
+  statWrong.textContent = รวมผิด;
+  setFeedback('timeout', `โ ฑฑษี”เน€เธงเธฅเธฒ๏พืเธนเธ•เธียเธ่เธ่ย์ "${currentChar.r.toUpperCase()}"`);
+  อัปเดตป้ายสตรีค();
+  ถ้า (classList ของ legendGrid มีคำว่า 'open' อยู่) ให้อัปเดตน้ำหนักของคำอธิบายภาพ (updateLegendWeights())
+  setTimeout(() => nextQuestion(), 1700);
+}
+
+// โ”€o”€ คำถามต่อไป โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€โ ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+ฟังก์ชัน nextQuestion() {
+  หยุดการฟัง();
+  ตอบแล้ว = เท็จ;
+  heardText.textContent = '—';
+  heardText.classList.remove('filled');
+  feedback.className = 'feedback empty';
+  เนื้อหาข้อความแสดงความคิดเห็น = '';
+
+  charCard.classList.add('flip-out');
+  setTimeout(() => {
+    currentChar = pickChar();
+    charDisplay.textContent = currentChar.h;
+    charCard.classList.remove('flip-out');
+    charCard.classList.add('flip-in');
+    setTimeout(() => charCard.classList.remove('flip-in'), 300);
+    เริ่มตัวจับเวลา();
+    อัปเดตความคืบหน้า();
+  }, 200);
+}
+
+ฟังก์ชัน pickChar() {
+  const total = HIRAGANA.reduce((s,c) => s + weights[ch], 0);
+  let r = Math.random() * total;
+  สำหรับ (ค่าคงที่ c ของ HIRAGANA) { r -= น้ำหนัก[ch]; ถ้า (r <= 0) ให้คืนค่า c; }
+  คืนค่าฮิรากานะ[ความยาวฮิรากานะ - 1];
+}
+
+// โ”€o”€ ตัวช่วย UI โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€ โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+ฟังก์ชัน setFeedback(type, msg) {
+  feedback.className = 'feedback ' + type;
+  feedback.textContent = msg;
+}
+
+ฟังก์ชัน showFlash(emoji, good) {
+  resultFlash.textContent = อิโมจิ;
+  resultFlash.style.color = good ? 'var(--green)' : 'var(--red)';
+  resultFlash.className = 'result-flash ' + (good ? 'show-correct' : 'show-wrong');
+  setTimeout(() => resultFlash.className = 'result-flash', 600);
+}
+
+ฟังก์ชัน updateStreakBadge() {
+  ถ้า (streak >= 3) { streakBadge.textContent = `๑Ÿ”ฅ ${streak}`; streakBadge.classList.add('show'); }
+  มิฉะนั้น ให้ลบ 'show' ออกจาก streakBadge.classList
+}
+
+ฟังก์ชัน updateProgress() {
+  const n = Object.values(mastered).filter(Boolean).length;
+  progressFill.style.width = (n / HIRAGANA.length * 100) + '%';
+  progressText.textContent = `${n} / ${HIRAGANA.length}`;
+}
+
+// โ”€o”€ คำแนะนำ & ข้าม โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€โ ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+hintBtn.addEventListener('click', () => {
+  ถ้า (!currentChar || answered) ให้คืนค่ากลับ;
+  const r = currentChar.r;
+  setFeedback('hint', `๐Ÿ'ก เน€เธียนเธียกเอช”เน‰ังไทย "${r[0].toUpperCase()}" โ€” ${r.length} เธ•ฑ์ธันฑ์เธซซ`);
+  setTimeout(() => { if (!answered) { feedback.className='feedback empty'; feedback.textContent=''; } }, 2500);
+});
+
+skipBtn.addEventListener('click', () => {
+  ถ้า (ตอบแล้ว) ให้ส่งคืน;
+  clearInterval(clockInterval); stopListening();
+  ตอบแล้ว = จริง;
+  weights[currentChar.h] = Math.min(10, weights[currentChar.h] + 1);
+  setFeedback('timeout', `โ ญ เธ‰ เธียก โ€” เธียเธ• เธชเธ่เธ่ "${currentChar.r.toUpperCase()}"`);
+  setTimeout(() => nextQuestion(), 1300);
+});
+
+// โ”€o”€ ตำนาน โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€ โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+ฟังก์ชัน buildLegend() {
+  legendGrid.innerHTML = '';
+  HIRAGANA.forEach(c => {
+    const cell = document.createElement('div');
+    cell.className = 'legend-cell';
+    cell.innerHTML = `
+      <div class="hira">${ch}</div>
+      <div class="roma">${cr}</div>
+      <div class="weight-bar"><div class="weight-fill" id="wb-${ch}" style="width:${wPct(ch)}%"></div></div>
+    `;
+    legendGrid.appendChild(cell);
+  });
+}
+
+const wPct = h => Math.min(100, ((weights[h]-1)/9)*100);
+
+ฟังก์ชัน updateLegendWeights() {
+  HIRAGANA.forEach(c => { const el = $(`wb-${ch}`); if(el) el.style.width = wPct(ch)+'%'; });
+}
+
+legendToggle.addEventListener('click', () => {
+  const open = legendGrid.classList.toggle('open');
+  legendArrow.textContent = เปิด ? 'โ–ฒ' : 'โค–ผ';
+  ถ้า (เปิด) สร้างคำอธิบาย();
+});
+
+// โ”€o”€ เริ่ม โ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€โ ”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€o”€
+สร้างตำนาน();
+คำถามถัดไป();
+</script>
+</body>
+</html>
